@@ -1,0 +1,41 @@
+# coding: shift_jis
+#ÔŒoAÔˆÜ‚©‚çAzEl‚Ö‚Ì•ÏŠ·ƒƒCƒ“ƒvƒƒOƒ‰ƒ€----Ã~‹O“¹‚Ì‚İ-----
+
+from math import *
+from geo import *
+from AzEl_Tyokkaten_calcu import *
+import numpy as np
+
+#’è”
+k_ido=radians(35.954793) #­“‡ˆÜ“xrad
+k_keido=radians(140.662899) #­“‡Œo“xrad
+th_g0=118.579594#1/19“ú00:00‚É‚¨‚¯‚é•½‹ÏP¯‘—§“V•¶‘äweb‚æ‚èæ“¾
+ae=6378.140 #’n‹…”¼ŒaÔ“¹”¼Œa‚ğ‰¼’èkm
+h=35786 #‚“xÃ~‹O“¹‚ğ‰¼’èkm
+R=6378.15#’n‹…”¼Œa_Ã~‰q¯İŒv“ü–å‚æ‚è
+
+print "ŠÏ‘ª[]‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢(UTC)"
+T_h=input(">>>")
+print "ŠÏ‘ª[•ª]‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢(UTC)"
+T_m=input(">>>")
+print "ŠÏ‘ª[•b]‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢(UTC)"
+T_s=input(">>>")
+print "ÔŒo‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢(deg)"
+arufa=radians(input(">>>"))
+print "ÔˆÜ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢(deg)"
+siguma=radians(input(">>>"))
+
+subT=T_h*60*60+T_m*60+T_s#P¯‚ÌŠî€ŠÔ‚Æ‚ÌŠÔ·s
+th_g=th_g0+subT*0.004178074622295#P¯ŒvZ
+th_g=radians(th_g)#P¯
+th_k=th_g+k_keido#­“‡P¯
+
+
+#‚±‚±‚©‚çmainŠÖ”
+#---------------------•ûŒü—]Œ·ŒvZ‚É‚æ‚éAzELŒvZ-------------------------
+AzEl=calcu_sekidou(th_g,k_ido,th_k,arufa,siguma)
+Az=AzEl[0]
+El=AzEl[1]
+TisinSisaAz=calcu_TisinSisaAz(R,k_ido,Az)
+TisinSisaEl=calcu_TisinSisaEl(R,El)
+print Az-TisinSisaAz,El-TisinSisaEl
